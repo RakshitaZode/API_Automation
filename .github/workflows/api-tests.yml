@@ -1,26 +1,28 @@
 name: API Test Pipeline
 
-on: [push, pull_request]
+on: 
+  push:
+  pull_request:
 
 jobs:
-run-tests:
- runs-on: ubuntu-latest
+  run-tests:
+    runs-on: ubuntu-latest
 
- steps:
- - name: Checkout code
-   uses: actions/checkout@v3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
- - name: Set up Java
-   uses: actions/setup-java@v3
-   with:
-     java-version: '11'
-     distribution: 'adopt'
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
 
- - name: Build and run tests
-   run: mvn clean test
+      - name: Build and run tests
+        run: mvn clean test
 
- - name: Upload Test Reports
-   uses: actions/upload-artifact@v3
-   with:
-     name: junit-report
-     path: target/surefire-reports/
+      - name: Upload Test Reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: junit-report
+          path: target/surefire-reports/
